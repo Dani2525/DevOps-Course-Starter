@@ -10,10 +10,8 @@ app.config.from_object(Config())
 
 @app.route('/')
 def index():
-     allitems=get_items()
-     return render_template("index.html",todo=allitems)
-     trello = requests.get('https://trello.com/b/byjuj5uu/todo')
-     trello.json()
+     response = requests.get('https://trello.com/b/byjuj5uu/todo')
+     trelloApi=response.json()
 
 @app.route('/newitem' , methods=['POST'])
 def newitems():
