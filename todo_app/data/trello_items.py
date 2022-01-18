@@ -33,3 +33,18 @@ def createnewcard ():
 )
 
         print(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))
+
+@app.route('/completeitem<id>')
+def completeitem(id)):
+   
+    url = "https://api.trello.com/1/cards/{id}/checkItem/{idCheckItem}"
+
+    response = requests.request(
+    "PUT",
+    url
+)
+
+    print(response.text)
+
+
+    
