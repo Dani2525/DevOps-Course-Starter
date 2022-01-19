@@ -1,50 +1,39 @@
-import requests 
-import json
+import os
+import requests
+from flask import request
+def getcards():
+    boardid = os.getenv('TRELLO_BOARDID')
+    url = f"https://api.trello.com/1/boards/{boardid}/cards"
 
-@app.route('/alltodoitems' , methods=['GET'])
-def alltodoitems():
-    url = "https://api.trello.com/1/boards/{61bb961c223edf0a94b3973f}/cards"
+    response = requests.request(
+     "GET",
+      url,     
+      params = {
+          'key':os.getenv('TRELLO_KEY'),
+          'token':os.getenv('TRELLO_TOKEN'),
+          'cards':'open'
+      }
+     )
+    return response
 
-response = requests.request(
-   "GET",
-    url,
-    cards=open
-)
+def createcard():
+     url = "https://api.trello.com/1/cards"
 
-    print(response.text)
-
-@app.route('/createnewcard' , methods=['POST'])
-def createnewcard ():
-    url = "https://api.trello.com/1/cards"
-
-    headers = {
+     headers = {
         "Accept": "application/json"
-}
+	}
 
-    query = {
-        'idList': '61b9c21fde84b95cb7973adc'
-}
+     query = {
+        'idList':os.getenv('TRELLO_LISTID1'),
+        'key':os.getenv('TRELLO_KEY'),
+        'token':os.getenv('TRELLO_TOKEN'),
+        'name': request.form["title"] 
+	}
 
-    response = requests.request(
+     response = requests.request(
         "POST",
-        url,
-        headers=headers,
-        params=query
-)
-
-        print(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))
-
-@app.route('/completeitem<id>')
-def completeitem(id)):
-   
-    url = "https://api.trello.com/1/cards/{id}/checkItem/{idCheckItem}"
-
-    response = requests.request(
-    "PUT",
-    url
-)
-
-    print(response.text)
-
-
-    
+         url,
+         headers=headers,
+         params=query
+	)
+     return response

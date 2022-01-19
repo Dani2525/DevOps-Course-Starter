@@ -12,14 +12,17 @@
       <h2>Items</h2>
       <ul class="list-group mb-4">
         {% for my_item in todo %}
+        <form action= "/complete_item/{{my_item.id}}" method="post" > 
+          <input type="submit" value= "Done item">
+        </form> 
        <li  >{{my_item.title}}</li>
         {% endfor %}
 
       </ul>
     </div>
   </div>
-  <form action= "/newitem" method="post" > 
+  <form action= "/createnewcard" method="post" > 
     <input type="text" name = "title">
     <input type="submit" value= "Add your new item in the box">
   </form>
-{% endblock %}
+  {% endblock %}
