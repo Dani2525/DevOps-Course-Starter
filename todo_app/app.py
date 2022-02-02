@@ -5,6 +5,14 @@ import requests
 import json
 import os
 
+class ViewModel :
+     def __init__(self, todo) :
+         self._todo = alltodoitems
+
+     @property
+     def todo(self) :
+         return self._todo    
+
 app = Flask(__name__)
 app.config.from_object(Config())
 
@@ -17,7 +25,8 @@ def alltodoitems():
         item=Item(card['id'],card['name'])
         Allitems.append(item)
 
-    return render_template("index.html",todo=Allitems)
+    todo_view_model = ViewModel(todo)
+    return render_template("index.html", view_model = todo_view_model)
 
 
 @app.route('/createnewcard' , methods=['POST'] )
@@ -58,4 +67,3 @@ class Item:
     def from_trello_card(cls, card, list):
         return cls(card['id'], card['name'], list['name']) 
 
-#item = Item.from_trello_card(card, card_list) 
