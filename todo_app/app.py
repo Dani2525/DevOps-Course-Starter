@@ -10,7 +10,7 @@ class ViewModel :
          self._todo = alltodoitems
 
      @property
-     def todo(self) :
+     def my_item(self) :
          return self._todo    
 
 app = Flask(__name__)
@@ -25,7 +25,7 @@ def alltodoitems():
         item=Item(card['id'],card['name'])
         Allitems.append(item)
 
-    todo_view_model = ViewModel(todo)
+    todo_view_model = ViewModel(alltodoitems)
     return render_template("index.html", view_model = todo_view_model)
 
 
