@@ -6,12 +6,21 @@ import json
 import os
 
 class ViewModel :
-     def __init__(self, todo) :
+     def __init__(self, alltodoitems) :
          self._todo = alltodoitems
 
      @property
      def my_item(self) :
-         return self._todo    
+         return self._todo   
+
+     @property 
+     def done_items(self):
+         result = []
+         for doneitem in self._todo:
+             if doneitem.status == 'Done':
+              result.append(doneitem)
+         
+         
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -25,7 +34,7 @@ def alltodoitems():
         item=Item(card['id'],card['name'])
         Allitems.append(item)
 
-    todo_view_model = ViewModel(alltodoitems)
+    todo_view_model = ViewModel(Allitems)
     return render_template("index.html", view_model = todo_view_model)
 
 
