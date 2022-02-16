@@ -1,3 +1,6 @@
+from unittest import result
+
+
 class ViewModel :
      def __init__(self, alltodoitems) :
          self._todo = alltodoitems
@@ -12,6 +15,7 @@ class ViewModel :
          for doneitem in self._todo:
              if doneitem.status == 'Done':
               result.append(doneitem)
+         return result
 
 class Item:
     def __init__(self, id, name, status = 'To Do'):
