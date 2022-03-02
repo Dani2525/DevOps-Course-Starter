@@ -60,3 +60,7 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Running tests
+
+You should run the command "poetry run pytest" to run all the tests that are assocoiated with this todoapp.
