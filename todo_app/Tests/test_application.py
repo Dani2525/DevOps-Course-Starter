@@ -26,12 +26,12 @@ class StubResponse():
 
 # Stub replacement for requests.get(url)
 def stub(method,url, params):
-    test_board_id = os.environ.get('TRELLO_BOARD_ID')
+    test_board_id = os.environ.get('TRELLO_BOARDID')
     fake_response_data = None
     if method == 'GET' and url == f'https://api.trello.com/1/boards/{test_board_id}/cards':
-        fake_response_data = [{'id': '456', 'name': 'Test card', 'idList': '61bb961c223edf0a94b39740'}]
+        fake_response_data = [{'id': '456', 'name': 'Test card', 'idList': '61bb961c223edf0a94b3973f'}]
         return StubResponse(fake_response_data)
-
+    (print(f'https://api.trello.com/1/boards/{test_board_id}/cards'))
     raise Exception(f'Integration test stub no mock for url "{url}"')
 
 
