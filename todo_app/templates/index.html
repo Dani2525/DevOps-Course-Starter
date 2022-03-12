@@ -11,7 +11,7 @@
     <div class="col-md-12">
       <h2>Items</h2>
       <ul class="list-group mb-4">
-        {% for my_item in todo %}
+        {% for my_item in view_model.my_item %}
         <form action= "/complete_item/{{my_item.id}}" method="post" > 
           <input type="submit" value= "Done item">
         </form> 

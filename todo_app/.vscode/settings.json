@@ -1,0 +1,13 @@
+{
+    "python.pythonPath": ".venv\\Scripts\\python.exe",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "templates"
+    ],
+    "python.testing.pytestEnabled": true
+}
