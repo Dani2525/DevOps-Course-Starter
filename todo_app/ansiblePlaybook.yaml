@@ -1,0 +1,16 @@
+- name:  Todoapp  
+  hosts: webservers
+  remote_user: root
+
+  tasks:
+  - name: Install To Do App on new web server
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
+  - name: Write the apache config file
+    ansible.builtin.template:
+      src: /srv/httpd.j2
+      dest: /etc/httpd.conf
+
+
+  

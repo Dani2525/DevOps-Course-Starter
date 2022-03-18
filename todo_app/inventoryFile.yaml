@@ -1,0 +1,7 @@
+all:
+  hosts:
+    18.171.4.45
+  children:
+    webservers:
+      hosts:
+        18.171.4.45

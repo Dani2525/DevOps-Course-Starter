@@ -5,7 +5,7 @@ class ViewModel :
          self._todo = alltodoitems
 
      @property
-     def my_item(self) :
+     def my_items(self) :
          return self._todo   
 
      @property 
