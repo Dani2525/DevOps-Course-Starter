@@ -64,3 +64,13 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 ## Running tests
 
 You should run the command "poetry run pytest" to run all the tests that are assocoiated with this todoapp.
+
+## how to build and run development and production containers
+
+build and run production containers by runnign these commands
+docker build --target production --tag todo-app:prod .
+docker run --env-file .env -p 5000:5000 todo-app:prod 
+
+build and run development containers by runnign these commands
+docker build --tag todo-app .  
+docker run --env-file .env todo_app
