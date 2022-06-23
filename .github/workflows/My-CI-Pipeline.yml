@@ -24,6 +24,8 @@ jobs:
     steps:
       - if: ${{ github.event_name == 'push' && github.event.action == 'm8' }}
         run: echo "publishing!"
+      - run: docker build --target production --tag daniphilip/m8 .
+      - run: docker push daniphilip/m8
 
  login:
     name: Login to Docker Hub
