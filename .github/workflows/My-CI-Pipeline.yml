@@ -17,7 +17,7 @@ jobs:
     - run: docker build --tag dani --target test .
     - run: docker run --env-file .env.test dani
 
- build two:
+ build-two:
     name: build production image and push to dockerhub  
     needs: Build and test
     runs-on: ubuntu-latest
