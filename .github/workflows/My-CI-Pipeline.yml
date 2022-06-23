@@ -16,4 +16,15 @@ jobs:
     - uses: actions/checkout@v2
     - run: docker build --tag dani --target test .
     - run: docker run --env-file .env.test dani
+
+ build two:
+    name: build production image and push to dockerhub  
+    needs: Build and test
+    on:
+      push:
+        branches:
+          - M8
+    run: echo "publishing!"
+
+
      
