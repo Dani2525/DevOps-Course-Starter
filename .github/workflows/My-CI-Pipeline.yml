@@ -1,0 +1,19 @@
+name: Continuous Integration
+on:
+  pull_request:
+    types: [opened, reopened]
+    paths-ignore: 
+      - 'README.md'
+  push:
+    paths-ignore: 
+      - 'README.md'
+
+jobs:
+ build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: docker build --tag dani --target test .
+    - run: docker run --env-file .env.test dani
+     

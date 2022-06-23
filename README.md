@@ -67,10 +67,14 @@ You should run the command "poetry run pytest" to run all the tests that are ass
 
 ## how to build and run development and production containers
 
-build and run production containers by runnign these commands
+build and run production containers by running these commands
 docker build --target production --tag todo-app:prod .
 docker run --env-file .env -p 5000:5000 todo-app:prod 
 
-build and run development containers by runnign these commands
+build and run development containers by running these commands
 docker build --tag todo-app .  
 docker run --env-file .env todo_app
+
+## running test container 
+test container run using CI pipeline in My-CI-Pipeline.yml file everytime you open or reopen a pull request or push to repository
+can also be observed on GitHub workflows to see which ones pass and fail.
