@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-    on:
-      push:
-        branches:
-          - M8     
+      - on:
+          push:
+            branches:
+              - M8     
