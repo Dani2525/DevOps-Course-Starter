@@ -19,7 +19,7 @@ jobs:
 
  build-two:
     name: build production image and push to dockerhub  
-    needs: Build and test
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - if: ${{ github.event_name == 'push' && github.event.action == 'm8' }}
