@@ -20,14 +20,11 @@ jobs:
  build two:
     name: build production image and push to dockerhub  
     needs: Build and test
+    run: echo "publishing!"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
     on:
       push:
         branches:
-          - M8
-    run: echo "publishing!"
-
-
-     
+          - M8     
