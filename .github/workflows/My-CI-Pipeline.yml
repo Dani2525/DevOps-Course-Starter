@@ -22,6 +22,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - if: ${{ github.event_name == 'push' && github.event.action == 'm8' }}
         run: echo "publishing!"
       - run: docker build --target production --tag daniphilip/m8:prod .
