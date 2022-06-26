@@ -25,8 +25,8 @@ jobs:
       - uses: actions/checkout@v2
       - if: ${{ github.event_name == 'push' && github.event.action == 'm8' }}
         run: echo "publishing!"
-      - run: docker build --target production --tag daniphilip/hello-world:latest .
-      - run: docker push daniphilip/hello-world:latest
+      - run: docker build --target production --tag daniphilip/hello-world:prod .
+      - run: docker push daniphilip/hello-world:prod
  login:
     name: Login to Docker Hub
     runs-on: ubuntu-latest
