@@ -11,5 +11,7 @@ FROM base as test
 ENV FLASK_ENV=test
 ENTRYPOINT ["poetry", "run", "pytest"]
 FROM base as production
-ENTRYPOINT ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:5000", "todo_app.app:create_app()"]
+CMD poetry run gunicorn "todo_app.app:create_app()" --bind 0.0.0.0:$PORT.
+COPY ./entrypoint.sh /app/entrypoint.sh
+ENTRYPOINT RUN chmod +x ./entrypoint.sh
 ENV FLASK_ENV=production
