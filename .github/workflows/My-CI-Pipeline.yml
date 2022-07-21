@@ -37,7 +37,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run : heroku container:login
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      - run: heroku container:login
       - run: docker build --tag registry.heroku.com/corndelm8/web --target production .
       - run: docker push registry.heroku.com/corndelm8/web
       - run: heroku container:release web
