@@ -31,3 +31,15 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}    
       - run: docker build --target production --tag daniphilip/hello-world:prod .
       - run: docker push daniphilip/hello-world:prod
+      
+ build-three:
+    name: deploying and running onto heroku
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run : heroku container:login
+      - run: docker build --tag registry.heroku.com/corndelm8/web --target production .
+      - run: docker push registry.heroku.com/corndelm8/web
+      - run: heroku container:release web
+
+    

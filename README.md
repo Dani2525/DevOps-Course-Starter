@@ -79,8 +79,10 @@ docker run --env-file .env todo_app
 test container run using CI pipeline in My-CI-Pipeline.yml file everytime you open or reopen a pull request or push to repository
 can also be observed on GitHub workflows to see which ones pass and fail.
 
-## deploying and runningon heroku
-firstly build the image using 
+## deploying and running on heroku
+firstly login to the heroku using
+heroku container:login 
+build the image using 
 docker build --tag registry.heroku.com/corndelm8/web --target production .
 push to heroku using 
 docker push registry.heroku.com/corndelm8/web

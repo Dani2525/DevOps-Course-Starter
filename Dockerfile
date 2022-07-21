@@ -11,5 +11,6 @@ FROM base as test
 ENV FLASK_ENV=test
 ENTRYPOINT ["poetry", "run", "pytest"]
 FROM base as production
+ENV PORT=5000
 CMD poetry run gunicorn "todo_app.app:create_app()" --bind 0.0.0.0:$PORT
 ENV FLASK_ENV=production
