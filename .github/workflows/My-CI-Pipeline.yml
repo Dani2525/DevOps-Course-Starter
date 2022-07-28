@@ -35,6 +35,8 @@ jobs:
  build-three:
     name: deploying and running onto heroku
     runs-on: ubuntu-latest
+    needs: build-two
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v2
       - uses: gonuit/heroku-docker-deploy@v1.3.3
