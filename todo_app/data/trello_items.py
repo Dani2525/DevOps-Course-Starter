@@ -1,4 +1,5 @@
 import os
+import pymongo
 import requests
 from flask import request
 def getcards():
@@ -14,26 +15,11 @@ def getcards():
           'cards':'open'
       }
      )
-    return response
+    return response   
 
-def createcard():
-     url = "https://api.trello.com/1/cards"
-
-     headers = {
-        "Accept": "application/json"
-	}
-
-     query = {
-        'idList':os.getenv('TRELLO_LISTID1'),
-        'key':os.getenv('TRELLO_KEY'),
-        'token':os.getenv('TRELLO_TOKEN'),
-        'name': request.form["title"] 
-	}
-
-     response = requests.request(
-        "POST",
-         url,
-         headers=headers,
-         params=query
-	)
-     return response
+def createcard(name):
+    client = pymongo.MongoClient("mongodb://module10:ulH6uBzQRqsLbVIWVR44Cil6nOwb6AML7ykXzCCBygQI4uvkn2Ok8yK1B3GjrhzCgjOE3LdGHJhkUObXOtpXaw==@module10.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@module10@")
+    db = client.todo_db
+    todocards = db.todo_collection
+    card = {"name": name, "status": "To Do"}
+    todocards.insert_one(card).inserted_id
