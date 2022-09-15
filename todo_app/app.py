@@ -28,8 +28,8 @@ def create_app():
 
 
     @app.route('/createnewcard' , methods=['POST'] )
-    def createnewcard ():
-        response = createcard()
+    def createnewcard (name):
+        response = createcard(name)
         print(response.text)
         return redirect('/')
 
