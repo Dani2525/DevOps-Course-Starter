@@ -1,9 +1,11 @@
+from flask import request
 from flask import Flask, render_template,redirect
 from todo_app.data.trello_items import createcard, getcards
 from todo_app.flask_config import Config
 import requests
 import os
 from todo_app.ViewModel import ViewModel,Item
+
 
 def create_app():
     app = Flask(__name__)
@@ -28,9 +30,9 @@ def create_app():
 
 
     @app.route('/createnewcard' , methods=['POST'] )
-    def createnewcard (name):
-        response = createcard(name)
-        print(response.text)
+    def createnewcard ():
+        name = request.form["title"]
+        createcard(name)
         return redirect('/')
 
     
