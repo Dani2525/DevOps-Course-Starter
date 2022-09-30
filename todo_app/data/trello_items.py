@@ -2,25 +2,37 @@ import os
 import pymongo
 import requests
 from flask import request
-def getcards():
-    boardid = os.getenv('TRELLO_BOARDID')
-    url = f"https://api.trello.com/1/boards/{boardid}/cards"
+from bson.objectid import ObjectId
 
-    response = requests.request(
-     "GET",
-      url,     
-      params = {
-          'key':os.getenv('TRELLO_KEY'),
-          'token':os.getenv('TRELLO_TOKEN'),
-          'cards':'open'
-      }
-     )
-    return response   
+def getitems():
+    allitems = []
 
-
-def createcard(name):
     client = pymongo.MongoClient("mongodb://module10:ulH6uBzQRqsLbVIWVR44Cil6nOwb6AML7ykXzCCBygQI4uvkn2Ok8yK1B3GjrhzCgjOE3LdGHJhkUObXOtpXaw==@module10.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@module10@")
     db = client.todo_db
-    todocards = db.todo_collection
-    card = {"name": name, "status": "To Do"}
-    todocards.insert_one(card).inserted_id
+    alltodoitems = db.todo_collection
+    for todo in alltodoitems.find():
+        allitems.append(todo)
+
+    return allitems
+
+def createitem(name):
+    client = pymongo.MongoClient("mongodb://module10:ulH6uBzQRqsLbVIWVR44Cil6nOwb6AML7ykXzCCBygQI4uvkn2Ok8yK1B3GjrhzCgjOE3LdGHJhkUObXOtpXaw==@module10.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@module10@")
+    db = client.todo_db
+    todoitems = db.todo_collection
+    item = {"name": name, "status": "To Do"}
+    todoitems.insert_one(item).inserted_id
+
+def changestatus(id,status):
+    client = pymongo.MongoClient("mongodb://module10:ulH6uBzQRqsLbVIWVR44Cil6nOwb6AML7ykXzCCBygQI4uvkn2Ok8yK1B3GjrhzCgjOE3LdGHJhkUObXOtpXaw==@module10.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@module10@")
+    db = client.todo_db
+    todoitems = db.todo_collection
+    filter = { '_id': ObjectId(id) }
+    newvalues = { "$set": { 'status': status } }
+    response = todoitems.update_one(filter,newvalues)
+    return response
+
+# items=getitems() 
+# print(items)
+# createitem("nametest")
+#changestatus("6332d43411c7531211302a71","done")
+    
