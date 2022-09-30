@@ -30,9 +30,4 @@ def changestatus(id,status):
     newvalues = { "$set": { 'status': status } }
     response = todoitems.update_one(filter,newvalues)
     return response
-
-# items=getitems() 
-# print(items)
-# createitem("nametest")
-#changestatus("6332d43411c7531211302a71","done")
     
