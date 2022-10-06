@@ -3,7 +3,7 @@ import pymongo
 import requests
 from flask import request
 from bson.objectid import ObjectId
-import todo_app.data.mongo_items as mongo
+from todo_app.data.mongo_items import mongo, _id, status
 
 def getitems():
     allitems = []
