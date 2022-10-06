@@ -2,7 +2,7 @@ from flask import request
 from flask import Flask, render_template,redirect
 from todo_app.flask_config import Config
 import os
-from todo_app.data.mongo_items import createcard, getitems, changestatus, _id, status
+from todo_app.data.mongo_items import createitem, getitems, changestatus, _id, status
 from todo_app.ViewModel import ViewModel,Item
 
 
@@ -20,7 +20,7 @@ def create_app():
     @app.route('/createnewcard' , methods=['POST'] )
     def createnewcard ():
         name = request.form["title"]
-        createcard(name)
+        createitem(name)
         return redirect('/')
 
     

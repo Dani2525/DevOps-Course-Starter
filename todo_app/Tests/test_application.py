@@ -5,7 +5,7 @@ from todo_app import app
 from dotenv import load_dotenv, find_dotenv
 import mongomock
 import pymongo
-from todo_app.data.mongo_items import createcard, getitems, changestatus, _id, status
+from todo_app.data.mongo_items import createitem, getitems, changestatus, _id, status
 
 @pytest.fixture
 def client():
