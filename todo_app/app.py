@@ -1,6 +1,5 @@
 from flask import request
 from flask import Flask, render_template,redirect
-from todo_app.data.mongo_items import mongo
 from todo_app.flask_config import Config
 import os
 from todo_app.data.mongo_items import mongo, _id, status

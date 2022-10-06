@@ -5,6 +5,7 @@ from todo_app import app
 from dotenv import load_dotenv, find_dotenv
 import mongomock
 import pymongo
+import todo_app.data.mongo_items as mongo
 
 @pytest.fixture
 def client():
