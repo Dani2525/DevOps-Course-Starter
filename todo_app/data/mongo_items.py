@@ -3,6 +3,7 @@ import pymongo
 import requests
 from flask import request
 from bson.objectid import ObjectId
+from todo_app.data.mongo_items import _id, status
 
 
 def getitems():
