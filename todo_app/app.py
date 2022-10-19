@@ -32,4 +32,4 @@ def create_app():
         mongo.changestatus(mongo._id,mongo.status)
         return redirect('/')
 
-    
+    return app    
