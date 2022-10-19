@@ -25,7 +25,7 @@ def test_index_page_with_no_items(client):
     assert 'item3' not in response.data.decode()
 
 def test_index_page_with_todo_items(client):
-    mongo_client = pymongo.MongoClient('mongodb://fakemongo.com')
+    mongo_client = pymongo.MongoClient(os.getenv("mongo_client"))
     db = mongo_client.todo_db
     collection = db.todo_collection
     collection.insert_one({
