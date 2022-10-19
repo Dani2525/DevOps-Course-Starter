@@ -5,9 +5,7 @@ from flask import request
 from bson.objectid import ObjectId
 
 def getitems():
-    import todo_app.data.mongo_items as mongo
     allitems = []
-    
     client = pymongo.MongoClient("mongodb://module10:ulH6uBzQRqsLbVIWVR44Cil6nOwb6AML7ykXzCCBygQI4uvkn2Ok8yK1B3GjrhzCgjOE3LdGHJhkUObXOtpXaw==@module10.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@module10@")
     db = client.todo_db
     alltodoitems = db.todo_collection
@@ -17,7 +15,6 @@ def getitems():
     return allitems
 
 def createitem(name):
-    import todo_app.data.mongo_items as mongo
     client = pymongo.MongoClient("mongodb://module10:ulH6uBzQRqsLbVIWVR44Cil6nOwb6AML7ykXzCCBygQI4uvkn2Ok8yK1B3GjrhzCgjOE3LdGHJhkUObXOtpXaw==@module10.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@module10@")
     db = client.todo_db
     todoitems = db.todo_collection
@@ -25,7 +22,6 @@ def createitem(name):
     todoitems.insert_one(item).inserted_id
 
 def changestatus(id,status):
-    import todo_app.data.mongo_items as mongo
     client = pymongo.MongoClient("mongodb://module10:ulH6uBzQRqsLbVIWVR44Cil6nOwb6AML7ykXzCCBygQI4uvkn2Ok8yK1B3GjrhzCgjOE3LdGHJhkUObXOtpXaw==@module10.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@module10@")
     db = client.todo_db
     todoitems = db.todo_collection
