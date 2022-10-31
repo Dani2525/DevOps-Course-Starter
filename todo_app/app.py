@@ -35,6 +35,8 @@ def create_app():
 
     @login_manager.unauthorized_handler
     def unauthenticated():
+        os.getenv('client_id')
+        return (f'https://github.com/login/oauth/authorize?client_id={client_id}')
         
         pass  # Add logic to redirect to the GitHub OAuth flow when unauthenticated
 
