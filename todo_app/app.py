@@ -4,6 +4,7 @@ from todo_app.flask_config import Config
 import os
 from todo_app.ViewModel import ViewModel,Item
 import todo_app.data.mongo_items as mongo
+from flask_login import login_required, LoginManager 
 
 
 def create_app():
@@ -28,15 +29,24 @@ def create_app():
     @app.route('/complete_item/<id>', methods=['POST'])
     @login_required 
     def complete_item(id):
-        mongo.changestatus(mongo._id,mongo.status)
+        mongo.changestatus(id,'Done')
         return redirect('/')
+
+    @app.route('/login/callback')
+    def callback():
+     code = request.args.get('code')
+
+     
+    
+    # then use "requests" to make the call to GitHub and swap the code for a token    
 
     login_manager = LoginManager()
 
     @login_manager.unauthorized_handler
     def unauthenticated():
-        os.getenv('client_id')
-        return (f'https://github.com/login/oauth/authorize?client_id={client_id}')
+        client_id = os.getenv('client_id')
+        return redirect(f'https://github.com/login/oauth/authorize?client_id={client_id}')
+        
         
         pass  # Add logic to redirect to the GitHub OAuth flow when unauthenticated
 
