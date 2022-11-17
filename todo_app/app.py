@@ -1,11 +1,13 @@
-from flask import request
-from flask import Flask, render_template,redirect
-from todo_app.flask_config import Config
 import os
-from todo_app.ViewModel import ViewModel,Item
-import todo_app.data.mongo_items as mongo
-from flask_login import login_required, LoginManager, UserMixin, login_user
+
 import requests
+from flask import Flask, redirect, render_template, request
+from flask_login import LoginManager, UserMixin, login_required, login_user
+
+import todo_app.data.mongo_items as mongo
+from todo_app.flask_config import Config
+from todo_app.ViewModel import Item, ViewModel
+
 
 class User(UserMixin):
     def __init__(self, id):
@@ -15,6 +17,8 @@ class User(UserMixin):
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())
+
+    app.config['LOGIN_DISABLED'] = os.getenv('LOGIN_DISABLED') == 'True'
 
     @app.route('/' , methods=['GET'])
     @login_required 
