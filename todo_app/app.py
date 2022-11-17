@@ -4,9 +4,13 @@ from todo_app.flask_config import Config
 import os
 from todo_app.ViewModel import ViewModel,Item
 import todo_app.data.mongo_items as mongo
-from flask_login import login_required, LoginManager 
+from flask_login import login_required, LoginManager, UserMixin, login_user
 import requests
 
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
+    
 
 def create_app():
     app = Flask(__name__)
@@ -35,18 +39,34 @@ def create_app():
 
     @app.route('/login/callback')
     def callback():
-     code = request.args.get('code')
+        authorisation_code = request.args.get('code')
 
-    data = {
-        'client_id': os.getenv('client_id'),
-        'client_secret': os.getenv('client_secret')
-    }
-    url = 'https://github.com/login/oauth/access_token'
-    headers = {'Accept': 'application/json'
-    }
-    
-    response = requests.post(url, data=data, headers= headers) 
-    access_token = response.json()['access_token']
+        data = {
+            'client_id': os.getenv('client_id'),
+            'client_secret': os.getenv('client_secret'),
+            'code': authorisation_code
+        }
+        url = 'https://github.com/login/oauth/access_token'
+        headers = {'Accept': 'application/json'
+        }
+        
+        access_token_response = requests.post(url, data=data, headers= headers) 
+        access_token = access_token_response.json()['access_token']
+
+        url = "https://api.github.com/user"
+        headers = {
+            'Authorization': f"Bearer {access_token}"
+        }
+
+        user_response = requests.get(url, headers = headers)
+
+        user_id = user_response.json()['id']
+
+        user = User(user_id)
+
+        login_user(user)
+
+        return redirect('/')
     
     # then use "requests" to make the call to GitHub and swap the code for a token    
 
@@ -62,7 +82,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
-        pass   # We will return to this later  
+        return User(user_id)
     
     login_manager.init_app(app)
     
