@@ -2,7 +2,7 @@ import os
 
 import requests
 from flask import Flask, redirect, render_template, request
-from flask_login import LoginManager, UserMixin, login_required, login_user
+from flask_login import LoginManager, UserMixin, login_required, login_user, current_user
 
 import todo_app.data.mongo_items as mongo
 from todo_app.flask_config import Config
@@ -10,8 +10,12 @@ from todo_app.ViewModel import Item, ViewModel
 
 
 class User(UserMixin):
-    def __init__(self, id):
+    def __init__(self, id, role):
         self.id = id
+        if id == "Dani2525":
+            self.role = "writer"
+        else:
+            self.role = "reader"    
     
 
 def create_app():
@@ -31,6 +35,8 @@ def create_app():
     @app.route('/createnewcard' , methods=['POST'] )
     @login_required 
     def createnewcard ():
+        if current_user.role != "writer":
+            return 'sorry, you cannot create a todo card'
         name = request.form["title"]
         mongo.createitem(name)
         return redirect('/')
