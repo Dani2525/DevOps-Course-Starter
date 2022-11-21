@@ -12,10 +12,14 @@ from todo_app.ViewModel import Item, ViewModel
 class User(UserMixin):
     def __init__(self, id, role):
         self.id = id
-        if id == "Dani2525":
+        if id == "dani2525":
             self.role = "writer"
         else:
-            self.role = "reader"    
+            self.role = "reader"
+
+    @property
+    def user_role():
+        return current_user.role        
     
 
 def create_app():
