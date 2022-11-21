@@ -16,7 +16,7 @@ class ViewModel :
          return result
 
      @property
-     def user_role():
+     def user_role(self):
         return current_user.role     
 
 class Item:

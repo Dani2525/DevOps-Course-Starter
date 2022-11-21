@@ -10,7 +10,7 @@ from todo_app.ViewModel import Item, ViewModel
 
 
 class User(UserMixin):
-    def __init__(self, id, role):
+    def __init__(self, id):
         self.id = id
         if id == "dani2525":
             self.role = "writer"
