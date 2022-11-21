@@ -15,13 +15,8 @@ class User(UserMixin):
         if id == "dani2525":
             self.role = "writer"
         else:
-            self.role = "reader"
-
-    @property
-    def user_role():
-        return current_user.role        
+            self.role = "reader"        
     
-
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())

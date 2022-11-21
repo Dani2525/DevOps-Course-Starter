@@ -1,5 +1,4 @@
-
-
+from flask_login import current_user
 class ViewModel :
      def __init__(self, alltodoitems) :
          self._todo = alltodoitems
@@ -15,6 +14,10 @@ class ViewModel :
              if doneitem.status == 'Done':
               result.append(doneitem)
          return result
+
+     @property
+     def user_role():
+        return current_user.role     
 
 class Item:
     def __init__(self, id, name, status = 'To Do'):
