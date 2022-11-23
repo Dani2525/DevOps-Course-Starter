@@ -16,7 +16,7 @@ data "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_app_service_plan" "main" {
-  name                = "dani-m12"
+  name                = "${var.prefix}-terraformed-asp"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
   kind                = "Linux"
@@ -28,7 +28,7 @@ resource "azurerm_app_service_plan" "main" {
 }
 
 resource "azurerm_app_service" "main" {
-  name                = "dani-m12"
+  name                = "${var.prefix}-todoapp"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
   app_service_plan_id = azurerm_app_service_plan.main.id
@@ -40,15 +40,14 @@ resource "azurerm_app_service" "main" {
 
   app_settings = {
     "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
-    "SECRET_KEY"= "secret-key"
+    "SECRET_KEY"= "${var.secret_key}"
     "mongo_client" = "azurerm_cosmosdb_account.main.connection_strings[0]"
-    "mongo_client"= "mongodb://dabi-m12:t0qwxU3V7MZ2Y55mhbnRAtefiGrwJTUHaTO6MhO0Kv8KTW3PX6GKvlon3LF1h8u29BCgQRYE41wgACDbSTzsgg==@dabi-m12.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@dabi-m12@"
-    "client_id"= "461640fd1000642d0462"
-    "client_secret"= "a1a2e8f1dc310351d18b4a3a36493c7edc9c0e22"
+    "client_id" = "${var.client_id}"
+    "client_secret" = "${var.client_secret}"
   }
 }
 resource "azurerm_cosmosdb_account" "main" {
-  name                = "dani-m12"
+  name                = "${var.prefix}-cosmos"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
   offer_type          = "Standard"
