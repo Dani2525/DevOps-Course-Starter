@@ -16,7 +16,7 @@ data "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_app_service_plan" "main" {
-  name                = "terraformed-asp"
+  name                = "dani-m12"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
   kind                = "Linux"
@@ -28,7 +28,7 @@ resource "azurerm_app_service_plan" "main" {
 }
 
 resource "azurerm_app_service" "main" {
-  name                = "dabi-m12"
+  name                = "dani-m12"
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
   app_service_plan_id = azurerm_app_service_plan.main.id
@@ -47,21 +47,10 @@ resource "azurerm_app_service" "main" {
     "client_secret"= "a1a2e8f1dc310351d18b4a3a36493c7edc9c0e22"
   }
 }
-
-resource "azurerm_resource_group" "example" {
-  name     = "OpenCohort21_DaniPhilip_ProjectExercise"
-  location = "West Europe"
-}
-
-resource "random_integer" "ri" {
-  min = 10000
-  max = 99999
-}
-
-resource "azurerm_cosmosdb_account" "db" {
+resource "azurerm_cosmosdb_account" "main" {
   name                = "dani-m12"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = data.azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
   offer_type          = "Standard"
   kind                = "MongoDB"
 
@@ -81,6 +70,7 @@ resource "azurerm_cosmosdb_account" "db" {
 
   capabilities {
     name = "EnableMongo"
+
   }
 
   capabilities { 
@@ -92,26 +82,14 @@ resource "azurerm_cosmosdb_account" "db" {
     max_interval_in_seconds = 300
     max_staleness_prefix    = 100000
   }
-
-  geo_location {
-    location          = "eastus"
-    failover_priority = 1
-  }
-
   geo_location {
     location          = "westus"
     failover_priority = 0
   }
 }
-
-data "azurerm_cosmosdb_account" "example" {
+resource "azurerm_cosmosdb_mongo_database" "main" {
   name                = "dani-m12"
-  resource_group_name = "OpenCohort21_DaniPhilip_ProjectExercise"
-}
-
-resource "azurerm_cosmosdb_mongo_database" "example" {
-  name                = "dani-m12"
-  resource_group_name = data.azurerm_cosmosdb_account.example.resource_group_name
-  account_name        = data.azurerm_cosmosdb_account.example.name
-  throughput          = 400
+  resource_group_name = azurerm_cosmosdb_account.main.resource_group_name
+  account_name        = azurerm_cosmosdb_account.main.name
+  lifecycle { prevent_destroy = true }
 }
