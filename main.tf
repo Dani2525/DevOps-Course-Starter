@@ -90,5 +90,4 @@ resource "azurerm_cosmosdb_mongo_database" "main" {
   name                = "dani-m12"
   resource_group_name = azurerm_cosmosdb_account.main.resource_group_name
   account_name        = azurerm_cosmosdb_account.main.name
-  lifecycle { prevent_destroy = true }
 }
