@@ -38,6 +38,6 @@ jobs:
    runs-on: ubuntu-latest 
    steps:
     - run: terraform init
-    - run: terraform apply -var "prefix=dani-m12" -var "secret_key=$SECRET_KEY" -var "client_id=$client_id" -var "client_secret=$client_secret" -auto-approve
+    - run: terraform apply -auto-approve -var "prefix=dani-m12" -var "secret_key=$SECRET_KEY" -var "client_id=$client_id" -var "client_secret=$client_secret" -auto-approve
     - run: curl -dH -X POST "$(terraform output -raw cd_webhook)"
 
