@@ -5,6 +5,12 @@ terraform {
       version = ">= 2.92"
     }
   }
+    backend "azurerm" {
+      resource_group_name  = "OpenCohort21_DaniPhilip_ProjectExercise"
+      storage_account_name = "danitfstateaccount"
+      container_name       = "danitfstate"
+      key                  = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
@@ -91,3 +97,4 @@ resource "azurerm_cosmosdb_mongo_database" "main" {
   resource_group_name = azurerm_cosmosdb_account.main.resource_group_name
   account_name        = azurerm_cosmosdb_account.main.name
 }
+
