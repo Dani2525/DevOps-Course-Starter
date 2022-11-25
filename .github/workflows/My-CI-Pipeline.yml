@@ -32,3 +32,11 @@ jobs:
       - run: docker build --target production --tag daniphilip/hello-world:prod .
       - run: docker push daniphilip/hello-world:prod
       - run: curl --fail -dH -X POST ${{secrets.WEBHOOK}}
+
+ deploy:
+   name: deploy changes
+   steps:
+    - run: terraform init
+    - run: terraform apply -var "prefix=dani-m12" -var "secret_key=$SECRET_KEY" -var "client_id=$client_id" -var "client_secret=$client_secret"
+    - run: curl -dH -X POST "$(terraform output -raw cd_webhook)"
+
