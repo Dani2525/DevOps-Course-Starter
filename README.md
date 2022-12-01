@@ -35,10 +35,10 @@ The `.env` file is used by flask to set environment variables when running `flas
 
 ## new Environment variables
 
-SECRET_KEY=secret-key
-mongo_client=mongodb://module10:t0qwxU3V7MZ2Y55mhbnRAtefiGrwJTUHaTO6MhO0Kv8KTW3PX6GKvlon3LF1h8u29BCgQRYE41wgACDbSTzsgg==@module10.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@module10@
-client_id=461640fd1000642d0462
-client_secret=a1a2e8f1dc310351d18b4a3a36493c7edc9c0e22
+SECRET_KEY
+mongo_client
+client_id
+client_secret
 
 ## Running the App
 

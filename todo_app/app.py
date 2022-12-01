@@ -43,6 +43,8 @@ def create_app():
     @app.route('/complete_item/<id>', methods=['POST'])
     @login_required 
     def complete_item(id):
+        if current_user.role != "writer":
+            return 'sorry, you cannot set a todo card to done'
         mongo.changestatus(id,'Done')
         return redirect('/')
 
