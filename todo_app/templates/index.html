@@ -1,8 +1,3 @@
-{% if view_model.user_role == 'writer' %}
-
-<You are allowed to write to this>
-
-{% endif %}
 {% extends "layout.html" %}
 {% block title %}To-Do App{% endblock %}
 
@@ -21,6 +16,7 @@
         <form action= "/complete_item/{{my_item.id}}" method="post" > 
           <input type="submit" value= "Done item">
         </form> 
+        {%endif%}
        <li  >{{my_item.title}}</li>
         {% endfor %}
 
@@ -32,4 +28,5 @@
     <input type="text" name = "title">
     <input type="submit" value= "Add your new item in the box">
   </form>
+  {%endif%}
   {% endblock %}
