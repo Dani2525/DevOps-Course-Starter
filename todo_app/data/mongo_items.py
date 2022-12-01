@@ -21,7 +21,7 @@ def createitem(name):
     db = client.todo_db
     todoitems = db.todo_collection
     item = {"name": name, "status": "To Do"}
-    todoitems.insert_one(item).inserted_id
+    todoitems.insert_one(item)
 
 def changestatus(id,status):
     client = pymongo.MongoClient(os.getenv("mongo_client"))
