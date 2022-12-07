@@ -86,5 +86,8 @@ ARM_SUBSCRIPTION_ID
 ARM_TENANT_ID
 application can be seen on https://dani-m12-todoapp.azurewebsites.net
 
+## lOGGING
+env variable Called lOG_LEVEL, configurably set to DEBUG or ERROR  
+
 
 

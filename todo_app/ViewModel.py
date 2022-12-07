@@ -17,7 +17,9 @@ class ViewModel :
 
      @property
      def user_role(self):
-        return current_user.role     
+         print(current_user.id)
+         print(current_user.role)
+         return current_user.role
 
 class Item:
     def __init__(self, id, name, status = 'To Do'):
