@@ -87,7 +87,9 @@ ARM_TENANT_ID
 application can be seen on https://dani-m12-todoapp.azurewebsites.net
 
 ## lOGGING
-env variable Called lOG_LEVEL, configurably set to DEBUG or ERROR  
+loggly is used to add logs to the todoapp
+env variable Called lOG_LEVEL, configurably set to DEBUG or ERROR 
+LOGGLY_TOKEN used for authentication 
 
 
 
