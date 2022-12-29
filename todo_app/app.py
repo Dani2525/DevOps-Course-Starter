@@ -13,7 +13,7 @@ from logging import Formatter
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
-        if id == "Dani2525":
+        if id == "94120348":
             self.role = "writer"
         else:
             self.role = "reader"        
