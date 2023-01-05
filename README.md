@@ -77,5 +77,14 @@ docker run --env-file .env todo_app
 test container run using CI pipeline in My-CI-Pipeline.yml file everytime you open or reopen a pull request or push to repository
 can also be observed on GitHub workflows to see which ones pass and fail.
 
+## Terraform
+main.tf file uses declarative script to make Azure Infrastructure, where Todoapp is deployed to.
+new variables added 
+ARM_CLIENT_ID
+ARM_CLIENT_SECRET
+ARM_SUBSCRIPTION_ID
+ARM_TENANT_ID
+application can be seen on https://dani-m12-todoapp.azurewebsites.net
+
 
 

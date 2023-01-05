@@ -59,7 +59,8 @@ def create_app():
         headers = {'Accept': 'application/json'
         }
         
-        access_token_response = requests.post(url, data=data, headers= headers) 
+        access_token_response = requests.post(url, data=data, headers= headers)
+        access_token_response.raise_for_status()
         access_token = access_token_response.json()['access_token']
 
         url = "https://api.github.com/user"
