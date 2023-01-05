@@ -44,7 +44,7 @@ def create_app():
         app.logger.addHandler(handler)
         app.logger.info("You have successfully logged in")    
         if current_user.role != "writer":
-            app.logger.warn(f"user {current_user.id} tried to create a card without permissions")
+            app.logger.warn(f" user {current_user.id} tried to create a card without permissions")
             return 'sorry, you cannot create a todo card'
         name = request.form["title"]
         mongo.createitem(name)
@@ -57,7 +57,8 @@ def create_app():
             app.logger.warn(f"user {current_user.id} tried to create a card without permissions")    
             return 'sorry, you cannot set a todo card to done'
         mongo.changestatus(id,'Done')
-        app.logger.info(f"user  {current_user.id} has set a card to done")
+        app.logger.info(f"{Item.id} was set to done")
+        app.logger.info(f" user  {current_user.id} has set a card to done")
         return redirect('/')
 
     @app.route('/login/callback')

@@ -88,7 +88,7 @@ application can be seen on https://dani-m12-todoapp.azurewebsites.net
 
 ## lOGGING
 loggly is used to add logs to the todoapp
-env variable Called lOG_LEVEL, configurably set to DEBUG or ERROR 
+env variable Called LOG_LEVEL, configurably set to DEBUG, ERROR, WARN, INFO.
 LOGGLY_TOKEN used for authentication 
 
 
