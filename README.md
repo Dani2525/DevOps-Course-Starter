@@ -91,5 +91,28 @@ loggly is used to add logs to the todoapp
 env variable Called LOG_LEVEL, configurably set to DEBUG, ERROR, WARN, INFO.
 LOGGLY_TOKEN used for authentication 
 
+## MINIKUBE
+Minikube is a version of Kubernetes that you can run locally on a
+development machine
+
+### Build base Docker Image
+```bash
+docker build --target production --tag todo-app:prod.
+```
+
+## Minikube Deployment
+ Load docker image by :
+```bash  
+minikube image load todo-app:prod 
+```
+
+## Start the deployments   
+```bash 
+kubectl apply -f deployment.yaml  
+kubectl apply -f service.yaml 
+```
+
+it is now running from local minikibe cluster and can be accessed.
+
 
 

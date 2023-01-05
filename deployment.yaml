@@ -1,0 +1,27 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: module-14
+spec:
+   selector:
+     matchLabels:
+       app: module-14
+   replicas: 1
+   template:
+     metadata:
+        labels:
+          app: module-14
+     spec:
+        containers:
+            - name: image 
+              image: todoapp:prod
+              env:
+                 client_id: '${{ secrets.client_id }}'
+                 client_secret: '${{ secrets.client_secret }}'
+                 SECRET_KEY: '${{ secrets.SECRET_KEY }}'
+                 mongo_client: '${{ secrets.mongo_client }}'
+                 LOGGLY_TOKEN: '${{ secrets.LOGGLY_TOKEN }}'
+              imagePullPolicy: Never
+              ports:
+              - containerPort: 80
