@@ -14,14 +14,34 @@ spec:
           app: module-14
      spec:
         containers:
-            - name: image 
-              image: todoapp:prod
-              env:
-                 client_id: '${{ secrets.client_id }}'
-                 client_secret: '${{ secrets.client_secret }}'
-                 SECRET_KEY: '${{ secrets.SECRET_KEY }}'
-                 mongo_client: '${{ secrets.mongo_client }}'
-                 LOGGLY_TOKEN: '${{ secrets.LOGGLY_TOKEN }}'
-              imagePullPolicy: Never
-              ports:
-              - containerPort: 80
+          - name: image 
+            image: todoapp:prod
+            env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                 name: secret_name
+                 key: secret_key
+          - name: client_id
+            valueFrom:
+              secretKeyRef:
+                 name: client_id
+                 key: client_id
+          - name: client_secret
+            valueFrom:
+              secretKeyRef:
+                 name: client_secret
+                 key: client_secret
+          - name: mongo_client
+            valueFrom:
+              secretKeyRef:
+                 name: mongo_client
+                 key: mongo_client
+          - name: LOGGLY_TOKEN
+            valueFrom:
+              secretKeyRef:
+                 name: LOGGLY_TOKEN
+                 key: LOGGLY_TOKEN
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
