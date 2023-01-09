@@ -32,3 +32,18 @@ jobs:
       - run: docker build --target production --tag daniphilip/hello-world:prod .
       - run: docker push daniphilip/hello-world:prod
       - run: curl --fail -dH -X POST ${{secrets.WEBHOOK}}
+
+ deploy:
+   name: deploy changes
+   runs-on: ubuntu-latest 
+   env:
+       ARM_CLIENT_ID: '${{ secrets.ARM_CLIENT_ID }}'
+       ARM_CLIENT_SECRET: '${{ secrets.ARM_CLIENT_SECRET }}'
+       ARM_TENANT_ID: '${{ secrets.ARM_TENANT_ID }}'
+       ARM_SUBSCRIPTION_ID: '${{ secrets.ARM_SUBSCRIPTION_ID }}'
+   steps:
+    - uses: actions/checkout@v2
+    - run: terraform init
+    - run: terraform apply -auto-approve -var "prefix=dani-m12" -var "secret_key=$SECRET_KEY" -var "client_id=$client_id" -var "client_secret=$client_secret" -auto-approve
+    - run: curl -dH -X POST "$(terraform output -raw cd_webhook)"
+

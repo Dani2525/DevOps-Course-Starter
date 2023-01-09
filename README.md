@@ -61,21 +61,44 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Running tests
 
-You should run the command "poetry run pytest" to run all the tests that are assocoiated with this todoapp.
+You should run the command 
+```bash
+poetry run pytest 
+``` 
+to run all the tests that are assocoiated with this todoapp.
 
 ## how to build and run development and production containers
 
 build and run production containers by running these commands
+```bash
 docker build --target production --tag todo-app:prod .
-docker run --env-file .env -p 5000:5000 todo-app:prod 
+docker run --env-file .env -p 5000:5000 todo-app:prod
+``` 
 
 build and run development containers by running these commands
+```bash
 docker build --tag todo-app .  
 docker run --env-file .env todo_app
+```
 
 ## running test container 
 test container run using CI pipeline in My-CI-Pipeline.yml file everytime you open or reopen a pull request or push to repository
 can also be observed on GitHub workflows to see which ones pass and fail.
+
+## Terraform
+main.tf file uses declarative script to make Azure Infrastructure, where Todoapp is deployed to.
+new variables added 
+ARM_CLIENT_ID
+ARM_CLIENT_SECRET
+ARM_SUBSCRIPTION_ID
+ARM_TENANT_ID
+To get yor application going run these commands
+``` bash 
+run: terraform init
+run: terraform apply -auto-approve -var "prefix=dani-m12" -var "secret_key=$SECRET_KEY" -var "client_id=$client_id" -var "client_secret=$client_secret" -auto-approve
+run: curl -dH -X POST "$(terraform output -raw cd_webhook)"
+``` 
+The application can be seen on https://dani-m12-todoapp.azurewebsites.net
 
 
 
