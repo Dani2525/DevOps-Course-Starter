@@ -95,23 +95,33 @@ LOGGLY_TOKEN used for authentication
 Minikube is a version of Kubernetes that you can run locally on a
 development machine
 
-### Build base Docker Image
-```bash
-docker build --target production --tag todo-app:prod.
-```
-
 ## Minikube Deployment
+ 
+ Build the docker Image 
+ ```bash
+ build --target production --tag todo-app:prod2 .
+ ```
+  start minikube by :
+```bash  
+minikube start 
+ ```
  Load docker image by :
 ```bash  
-minikube image load todo-app:prod 
-```
+minikube image load todo-app:prod2 . 
+ ```
+
 
 ## Start the deployments   
 ```bash 
 kubectl apply -f deployment.yaml  
-kubectl apply -f service.yaml 
+kubectl apply -f service.yaml
+kubectl apply -f secrets.yaml
 ```
 
+## forward to port    
+```bash 
+kubectl port-forward service/module-14 5000:5000
+```
 it is now running from local minikibe cluster and can be accessed.
 
 

@@ -15,33 +15,39 @@ spec:
      spec:
         containers:
           - name: image 
-            image: todoapp:prod
+            image: todo-app:prod2
             env:
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                 name: secret_name
+                 name: secret
                  key: secret_key
-          - name: client_id
-            valueFrom:
-              secretKeyRef:
-                 name: client_id
-                 key: client_id
-          - name: client_secret
-            valueFrom:
-              secretKeyRef:
-                 name: client_secret
-                 key: client_secret
-          - name: mongo_client
-            valueFrom:
-              secretKeyRef:
-                 name: mongo_client
-                 key: mongo_client
-          - name: LOGGLY_TOKEN
-            valueFrom:
-              secretKeyRef:
-                 name: LOGGLY_TOKEN
+            - name: client_id
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: client_id
+            - name: client_secret
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: client_secret
+            - name: mongo_client
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: mongo_client
+            - name: LOGGLY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                 name: secret
                  key: LOGGLY_TOKEN
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 80
+            - name: LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                 name: secret
+                 key: LOG_LEVEL
+              
+            imagePullPolicy: Never
+            ports:
+            - containerPort: 5000
