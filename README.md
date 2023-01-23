@@ -100,5 +100,43 @@ run: curl -dH -X POST "$(terraform output -raw cd_webhook)"
 ``` 
 The application can be seen on https://dani-m12-todoapp.azurewebsites.net
 
+## lOGGING
+loggly is used to add logs to the todoapp
+env variable Called LOG_LEVEL, configurably set to DEBUG, ERROR, WARN, INFO.
+LOGGLY_TOKEN used for authentication 
+
+## MINIKUBE
+Minikube is a version of Kubernetes that you can run locally on a
+development machine
+
+## Minikube Deployment
+ 
+ Build the docker Image 
+ ```bash
+ build --target production --tag todo-app:prod2 .
+ ```
+  start minikube by :
+```bash  
+minikube start 
+ ```
+ Load docker image by :
+```bash  
+minikube image load todo-app:prod2 . 
+ ```
+
+
+## Start the deployments   
+```bash 
+kubectl apply -f deployment.yaml  
+kubectl apply -f service.yaml
+kubectl apply -f secrets.yaml
+```
+
+## forward to port    
+```bash 
+kubectl port-forward service/module-14 5000:5000
+```
+it is now running from local minikibe cluster and can be accessed.
+
 
 
