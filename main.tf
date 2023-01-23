@@ -47,7 +47,7 @@ resource "azurerm_app_service" "main" {
   app_settings = {
     "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
     "SECRET_KEY"= "${var.secret_key}"
-    "mongo_client" = "azurerm_cosmosdb_account.main.connection_strings[0]"
+    "mongo_client" = azurerm_cosmosdb_account.main.connection_strings[0]
     "client_id" = "${var.client_id}"
     "client_secret" = "${var.client_secret}"
   }
