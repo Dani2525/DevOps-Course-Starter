@@ -43,10 +43,7 @@ spec:
                  name: secret
                  key: LOGGLY_TOKEN
             - name: LOG_LEVEL
-              valueFrom:
-                secretKeyRef:
-                 name: secret
-                 key: LOG_LEVEL
+              value: DEBUG
               
             imagePullPolicy: Never
             ports:
